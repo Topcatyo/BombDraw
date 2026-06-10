@@ -1,3 +1,17 @@
+# BombDraw
+An application that generates ideas for things to draw.
+
+Ver 1
+BombDraw is technically a fully-functioning applet that works in Python if you have all of the random things that are required to make it run.
+
+THE NEXT STEPS:
+- Obviously tuning the lists and probabilities ensure more consistently decent prompts.
+- BIG ONE!!!: UPGRADE to VERSION 2!
+  - Version 2 will be coded in GoLang so that it will be a more portable file that folks can use (I assume that's how it works).
+  - Hopefully it will also, visually, function more like a proper spinner instead of just cycling quickly through entries.
+  - Ideally, also, it will include sound.
+
+
 # BombDraw! — Run & Troubleshoot Guide ✅
 
 A short checklist to get the app running locally and recover if something goes wrong.
@@ -38,76 +52,3 @@ Then run:
 ```bash
 python main.py
 ```
-
----
-
-## System packages you may need (Debian/Ubuntu) 🧩
-- To create venvs: `sudo apt install python3-venv` (or `python3.12-venv` on some distros)
-- For GUI/Tkinter: `sudo apt install python3-tk`
-- For building `simpleaudio` C extension: `sudo apt install build-essential libasound2-dev python3-dev`
-
-These commands require sudo.
-
----
-
-## If pip refuses to install (PEP 668 / "externally managed") ⚠️
-- Preferred: create a venv (see above) and install packages inside it.
-- If you cannot create a venv, consider using `pipx` or `conda` to isolate packages.
-- As a last resort, pip will show how to override with `--break-system-packages` (not recommended).
-
----
-
-## Why `simpleaudio` might fail to build 🛠️
-If `pip install simpleaudio` fails during compilation, the most common cause is missing ALSA dev headers (`alsa/asoundlib.h`). Fix it with:
-
-```bash
-sudo apt install libasound2-dev build-essential python3-dev
-```
-
-Alternatively, use conda which provides prebuilt packages:
-
-```bash
-conda create -n draw python=3.12
-conda activate draw
-conda install -c conda-forge simpleaudio
-```
-
----
-
-## Notes about sounds and graceful fallback 🎧
-- The app uses `simpleaudio` to play .wav feedback but will still run without it.
-- If `simpleaudio` is missing, the program prints a warning like:
-
-```
-Warning: simpleaudio is not installed; sounds will be disabled.
-```
-
-- Missing `tkinter` will raise a `ModuleNotFoundError` — install system `python3-tk`.
-
----
-
-## Quick verification commands ✅
-```bash
-# Show which python and venv
-which python
-echo "$VIRTUAL_ENV"
-
-# Quick import checks
-python -c "import simpleaudio; print('simpleaudio OK')"
-python -c "import visual_layout; print('visual_layout import OK')"
-```
-
----
-
-## VS Code tips ✨
-- Select the project's interpreter: Ctrl+Shift+P → **Python: Select Interpreter** → choose `.venv/bin/python`.
-- Use Run → Start Debugging (F5). A sample `.vscode/launch.json` is included for convenience.
-
----
-
-## I can help more
-If you want, I can:
-- Add a `Makefile` with common tasks,
-- Add a short `CONTRIBUTING.md` / `DEVNOTES` with these tips.
-
-If you want any of those, tell me which one to add next. ✅
